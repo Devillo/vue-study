@@ -27,20 +27,70 @@
         - 注意key和回调方法不要使用箭头函数(如 ** vm.$watch('a', newVal => this.myMethod())** ),因为箭头函数承接上下文,所有 **this** 不会指向vue实例.
     - 实例的生命周期
 - 模板语法: DOM绑定Vue实例的数据;虚拟DOM渲染
-  - 文本
-    - "Mustache"语法,{{  }}插值
-    - v-once指令组织绑定节点上所有数据更新
-  - 纯HTML: v-html指令输出真正的html
-  - 属性: v-bind:key="value"指令绑定html属性
-  - 使用js表达式
-    - 不能使用语句: 比如var if()else()
-    - 不能访问用户定义的全局变量,可用Math和Date
-- 计算属性
+  - 插值
+    - 文本
+      - "Mustache"语法,{{  }}插值
+      - v-once指令组织绑定节点上所有数据更新
+    - 纯HTML: v-html指令输出真正的html
+    - 属性: v-bind:key="value"指令绑定html属性
+    - 使用js表达式
+      - 不能使用语句: 比如var if()else()
+      - 不能访问用户定义的全局变量,可用Math和Date
+  - 指令: 指令属性的值预期是 **单一JavaScript表达式**
+    - 参数
+    - 修饰符
+  - Filters
+    - 过滤器: 添加在 **mustache插值** 的尾部,用管道符 **|** 指示
+  - 缩写
+    - v-bind => :
+    - v-on => @
+- 计算属性:
+  - computed: { your computed function }
+  - 计算属性 vs Methods
+    - 计算属性只会在依赖改变时才会取值,否则返回之前调用的结果,而methods会每次调用取值
+  - 计算属性 vs Watched Property
+  - 计算 setter
+  - 观察 Wactchers: 数据变化响应时,需要执行异步操作或开销较大的操作
 - vue如何绑定class和style
-- 条件渲染和列表渲染
+  - v-bind:class="yours": yours可以是字符串或者数组或者对象
+  - 组件上的class会被绑定在跟元素上
+  - v-bind:style="yours": yours使用对象更加直观
+  - 内敛样式的绑定是自动走鞥家前缀
+- 条件渲染
+  - **v-if** 和 **v-else**
+  - **<template>**　中使用 **v-if** 适用于条件组,<template>不会被渲染
+  - 带 **key** 的元素会从新渲染,否则会复用
+  - v-show:切换元素的display属性
+- 列表渲染
+  - v-for: (item, index) in items, (item, index) of items 或者 (value, key, index) in object
+  - **<template>** 中的v-for可以渲染多个元素块
+  - 整数迭代: n in 10
+  - 组件和v-for: 数据不会传递到组件中,必须使用v-bind
+  - 数组更新测试
 - 事件处理器
+  - v-on:
+    - 监听DOM事件,直接执行js代码
+    - 绑定方法名
+    - 绑定内联js语句
+    - 可传递特殊变量 **$event**
+  - 事件修饰符
+    - v-on:click.stop 组织单击事件冒泡
+    - v-on:submit.prevent 提交事件不再重载页面
+    - v-on:click.stop.prevent 修饰符可以串联
+    - v-on:submit.prevent 只有修饰符
+    - v-on:click.capture="doThis" 添加事件侦听器时使用事件捕获模式
+    - v-on:click.self="doThis" 只在事件在该元素本身(而不是子元素)触发时触发回调
+    - v-on:click.once 单击事件最多执行一次
+  - 按键修饰符
+    - v-on:keyup.13='submit'
+    - v-on:keyup.enter='submit'
+    - @keyup.13='submit'
 - 表单控件绑定
+  - v-model
+  - 修饰符
 - 组件
+  - 什么是组件
+  - 如何注册组件
 
 
 ## 进阶
