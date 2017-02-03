@@ -91,16 +91,41 @@
 - 组件
   - 什么是组件
   - 如何注册组件
-
+  -
 
 ## 进阶
 
 - 深入响应式原理
+  - vue不能检测到对象属性的添加或删除,属性必须存在在data对象上才可以监听变化
+  - 使用 **Vue.set(obj, key, value)** 或者 **vm.$set(obj, key, value)** 将响应属性添加到嵌套的对象上
+  - 使用 **Object.assign()** 或 **_.extent()** 方法来添加属性,必须创建新对象的方式更新对象
+  - **vm.nextTick(callback)** 可以在组件更新完后调用。
 - 过渡效果和过渡状态
+  - **v-enter**, **v-enert-active**, **v-leave**, **v-leave-active**
 - Render函数的使用
+  - return createElement(tagName, this.$slots.default)
 - 如何自定义指令
+  - 钩子函数
+    - bind:只调用一次，指令第一次绑定到元素上使用，可以执行初始化
+    - inserted: 被绑定元素插入父节点时调用(父节点存在即可调用,不必存在于document中)
+    - update: 被绑定元素所在的模板更新时调用
+    - componentUpdated: 被绑定元素所在模板完成一次更新周期时调用
+    - unbind: 只调用一次,解绑时调用
+  - 钩子函数参数
+    - el
+    - binding: object
+      - name: 指令名
+      - value: 指令的绑定值
+      - oldValue: 指令绑定的前一个值
+      - expression: 绑定值的字符串形式
+      - arg: 传给指令的参数
+      - modifiers: 一个包含修饰符的对象
+    - vnode: Vue编译生产的虚拟节点
+    - oldVnode: 上一个虚拟节点
 - 混合
 - vue插件
+  - MyPlugin.install
+  - Vue.use(MyPlugin)
 - 单文件组件
 - 生产环境的部署
 - 路由
